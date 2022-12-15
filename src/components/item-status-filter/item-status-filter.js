@@ -1,6 +1,4 @@
-
 import React from 'react';
-
 import './item-status-filter.css';
 
 const ItemStatusFilter = () => {
@@ -15,5 +13,4 @@ const ItemStatusFilter = () => {
     </div>
   );
 };
-
 export default ItemStatusFilter;
