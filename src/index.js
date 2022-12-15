@@ -1,25 +1,8 @@
 import React  from "react";
 import ReactDOM  from "react-dom";
-const TodoList = () => {
-  return (
-    <ul>
-    <li>Learn React</li>
-    <li>Build Awesom app</li>
-  </ul>
-  )
-}
-const TodoInput = () => {
-  return (
-    <input placeholder="search"/>
-
-  )
-}
-const TodoHeader = () => {
-  return (
-    <h1>My todo List</h1>
-  )
-}
-
+import TodoHeader from "./components/todo-header";
+import TodoInput from "./components/todo-input";
+import TodoList from "./components/todo-list";
 const App = () => {
   return (
 <div>
