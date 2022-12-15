@@ -3,8 +3,8 @@ import TodoListItem from "./todo-list-item";
 const TodoList = () => {
     return (
       <ul>
-      <li><TodoListItem/></li>
-      <li><TodoListItem/></li>
+      <li><TodoListItem txt='Drink Coffe' /></li>
+      <li><TodoListItem txt='Do Something Important' important/></li>
     </ul>
     )
   }
