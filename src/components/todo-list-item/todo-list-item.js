@@ -6,13 +6,17 @@ export default class TodoListItem extends React.Component {
   constructor(){
     super()
     this.onClickLabel = () => {
-      this.setState({
-        done:true
+      this.setState(({done}) => {
+        return {
+          done: !done
+        }
       })
     }
     this.onMarkImportant = () => {
-      this.setState({
-        important:true
+      this.setState(({important}) => {
+        return {
+          important: !important
+        }
       })
     }
     this.state = {
