@@ -46,10 +46,32 @@ export default class App extends Component{
     })
   }
   onToggleDone = (id) => {
-    console.log('ToggleDone', id)
+    this.setState(({todoData}) => {
+      const inx = todoData.findIndex(el => el.id === id)
+      const newItem = {...todoData[inx], done:!todoData[inx].done}
+      const newArr = [
+        ...todoData.slice(0,inx),
+        newItem,
+        ...todoData.slice(inx + 1)
+      ]
+      return {
+        todoData:newArr
+      }
+    })
   }
   onToggleImportant = (id) => {
-    console.log('ToggleImportant', id)
+    this.setState(({todoData}) => {
+      const inx = todoData.findIndex(el => el.id === id)
+      const newItem = {...todoData[inx], important:!todoData[inx].important}
+      const newArr = [
+        ...todoData.slice(0,inx),
+        newItem,
+        ...todoData.slice(inx + 1)
+      ]
+      return {
+        todoData:newArr
+      }
+    })
   }
   render() {
     return (
