@@ -3,15 +3,25 @@ import './app.css'
 import TodoHeader from "../todo-header";
 import TodoInput from "../todo-input";
 import TodoList from "../todo-list";
+import ItemAddForm from "../item-add-form";
 import ItemStatusFilter from '../item-status-filter';
 
 export default class App extends Component{
+  maxId = 100
   state = {
     todoData:[
-      {label:"Drink some Coffe",id:"1"},
-      {label:"Make Awesome App",id:"2"},
-      {label:"Have a lunch",id:"3"}
+      this.createTodoItem("Drink some Coffe"),
+      this.createTodoItem("Make Awesome App"),
+      this.createTodoItem("Have a lunch")
     ]
+  }
+  createTodoItem(label){
+    return {
+      label,
+      important:false,
+      done:false,
+      id:this.maxId++
+    }
   }
   deleteItem = (id) => {
     this.setState(({todoData}) => {
@@ -23,6 +33,24 @@ export default class App extends Component{
       return {todoData:newArr}
     })
   }
+  addItem = (text) => {
+    this.setState(({todoData}) => {
+      const newItem = this.createTodoItem(text)
+      const newArr = [
+        ...todoData,
+        newItem
+      ]
+      return {
+        todoData:newArr
+      }
+    })
+  }
+  onToggleDone = (id) => {
+    console.log('ToggleDone', id)
+  }
+  onToggleImportant = (id) => {
+    console.log('ToggleImportant', id)
+  }
   render() {
     return (
       <div className="todo-app">
@@ -32,7 +60,12 @@ export default class App extends Component{
           <ItemStatusFilter/>
           </div>
           
-         <TodoList onDeleted={this.deleteItem} data={this.state.todoData}/>
+         <TodoList onDeleted={this.deleteItem}
+                  onToggleDone={this.onToggleDone}
+                  onToggleImportant={this.onToggleImportant}
+                   data={this.state.todoData}
+                   />
+         <ItemAddForm onAdditem={this.addItem}/>
         </div>
         )
   }
