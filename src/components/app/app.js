@@ -15,6 +15,19 @@ export default class App extends Component{
       this.createTodoItem("Have a lunch")
     ]
   }
+  toggleProperty(arr,id,prop){
+    const inx = arr.findIndex(el => el.id === id)
+    const newItem = {...arr[inx], [prop]:!arr[inx][prop]}
+    const newArr = [
+      ...arr.slice(0,inx),
+      newItem,
+      ...arr.slice(inx + 1)
+    ]
+    return {
+      todoData:newArr
+    }
+    
+  }
   createTodoItem(label){
     return {
       label,
@@ -47,36 +60,23 @@ export default class App extends Component{
   }
   onToggleDone = (id) => {
     this.setState(({todoData}) => {
-      const inx = todoData.findIndex(el => el.id === id)
-      const newItem = {...todoData[inx], done:!todoData[inx].done}
-      const newArr = [
-        ...todoData.slice(0,inx),
-        newItem,
-        ...todoData.slice(inx + 1)
-      ]
-      return {
-        todoData:newArr
-      }
+     return this.toggleProperty(todoData,id,'done')
     })
   }
   onToggleImportant = (id) => {
     this.setState(({todoData}) => {
-      const inx = todoData.findIndex(el => el.id === id)
-      const newItem = {...todoData[inx], important:!todoData[inx].important}
-      const newArr = [
-        ...todoData.slice(0,inx),
-        newItem,
-        ...todoData.slice(inx + 1)
-      ]
-      return {
-        todoData:newArr
-      }
+     return this.toggleProperty(todoData,id,'important')
+
     })
   }
   render() {
+    const {todoData} = this.state
+    const CountDone =todoData.filter(el => el.done).length
+    const CountToDo = todoData.length - CountDone
     return (
+     
       <div className="todo-app">
-          <TodoHeader toDo={3} done='4'/>
+          <TodoHeader toDo={CountToDo} done={CountDone}/>
           <div className="top-panel d-flex">
           <TodoInput/>
           <ItemStatusFilter/>
@@ -85,7 +85,7 @@ export default class App extends Component{
          <TodoList onDeleted={this.deleteItem}
                   onToggleDone={this.onToggleDone}
                   onToggleImportant={this.onToggleImportant}
-                   data={this.state.todoData}
+                   data={todoData}
                    />
          <ItemAddForm onAdditem={this.addItem}/>
         </div>
