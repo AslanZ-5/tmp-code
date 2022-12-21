@@ -3,16 +3,18 @@ import Footer from './Footer';
 import TaskList from './TaskList'
 import NewTaskForm from './NewTaskForm';
 
+
 import {Component} from 'react'
 
 
 export default class App extends Component{
     genId = 100
+    dt = new Date()
     state = {
       todoData:[
-        {title:'Completed task',created:'created 17 seconds ago',done:false,id:1},
-        {title:'Editing task',created:'created 137 seconds ago',done:false,id:2},
-        {title:'Active task',created:'created 217 seconds ago',done:false,id:3}
+        {title:'Completed task',created:'2022-05-11T12:11:32',done:false,id:1},
+        {title:'Editing task',created:'2021-11-11T04:32:33',done:false,id:2},
+        {title:'Active task',created:'2020-12-11T01:20:10',done:false,id:3}
       ],
       filter:'all'
     }
@@ -45,7 +47,9 @@ export default class App extends Component{
       })
     }
     AddItem = (val) => {
-      const newItem = {title:val,created:'created 32 seconds ago',done:false,id:this.genId++}
+      const d = new Date()
+      const newItem = {title:val,created: d.toISOString(),done:false,id:this.genId++}
+      
       return this.setState({
         todoData:[...this.state.todoData,newItem]
       })
