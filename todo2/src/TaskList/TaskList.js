@@ -1,4 +1,5 @@
 import Task from '../Task';
+import PropTypes from 'prop-types';
 const TaskList = ({data,onDoneToggle,onDeleteItem}) => {
     
     const tasks = data.map(task => {
@@ -23,4 +24,9 @@ const TaskList = ({data,onDoneToggle,onDeleteItem}) => {
   onDoneToggle: () => {},
   data:[]
 }
+TaskList.propTypes = {
+    data: PropTypes.array,
+    onDeleteItem: PropTypes.func,
+    onDoneToggle: PropTypes.func
+   }
 export default TaskList;

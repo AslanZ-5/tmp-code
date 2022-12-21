@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 
 const NewTaskForm = ({AddItem}) => {
     const [val,setVal] = useState('')
@@ -18,5 +19,8 @@ const NewTaskForm = ({AddItem}) => {
 }
 NewTaskForm.defaultProps= {
     AddItem: () => {console.log('ddd')}
+}
+NewTaskForm.propTypes = {
+    AddItem: PropTypes.func
 }
 export default NewTaskForm;

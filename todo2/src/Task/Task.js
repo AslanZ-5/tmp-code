@@ -1,5 +1,5 @@
-import { formatDistance, sub,parseISO } from 'date-fns'
-
+import { formatDistance, parseISO } from 'date-fns'
+import PropTypes from 'prop-types';
 const Task = ({data,onDeleteItem,onDoneToggle}) => {
   const created = formatDistance(parseISO(data.created),new Date(), { addSuffix: true,includeSeconds:true})
     return ( 
@@ -17,6 +17,11 @@ const Task = ({data,onDeleteItem,onDoneToggle}) => {
 Task.defaultProps = {
   data:{title:'*******', created:"*******"}
 }
+Task.propTypes = {
+  data: PropTypes.object,
+  onDeleteItem: PropTypes.func,
+  onDoneToggle: PropTypes.func
+ }
 export default Task;
 
 

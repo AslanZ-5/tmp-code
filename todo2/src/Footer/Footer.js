@@ -1,4 +1,6 @@
 import TasksFilter from "../TasksFilter"
+import PropTypes from 'prop-types';
+
 const Footer = ({filter,onFilter,clearComleted,data}) => {
   const buttons = [
     {name:'all', label:'All'},
@@ -27,4 +29,9 @@ Footer.defaultProps = {
   filter:'all',
   data:[]
 }
+Footer.propTypes = {
+  data: PropTypes.array,
+  onFilter: PropTypes.func,
+  filter: PropTypes.string
+ }
 export default Footer;
