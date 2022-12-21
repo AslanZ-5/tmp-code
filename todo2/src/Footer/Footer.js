@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import TasksFilter from "../TasksFilter";
 
 function Footer({ filter, onFilter, clearComleted, data }) {
+  const flet = filter;
   const buttons = [
     { name: "all", label: "All" },
     { name: "active", label: "Active" },
