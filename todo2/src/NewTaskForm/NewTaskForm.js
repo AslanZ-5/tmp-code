@@ -16,5 +16,7 @@ const NewTaskForm = ({AddItem}) => {
        </form>
      );
 }
- 
+NewTaskForm.defaultProps= {
+    AddItem: () => {console.log('ddd')}
+}
 export default NewTaskForm;

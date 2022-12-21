@@ -12,7 +12,9 @@ const Task = ({data,onDeleteItem,onDoneToggle}) => {
       </div>
      );
 }
- 
+Task.defaultProps = {
+  data:{title:'*******', created:"*******"}
+}
 export default Task;
 
 

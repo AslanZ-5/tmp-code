@@ -18,5 +18,9 @@ const TaskList = ({data,onDoneToggle,onDeleteItem}) => {
         </ul>
      );
 }
- 
+ TaskList.defaultProps = {
+  onDeleteItem: () => {},
+  onDoneToggle: () => {},
+  data:[]
+}
 export default TaskList;

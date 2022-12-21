@@ -22,4 +22,9 @@ const Footer = ({filter,onFilter,clearComleted,data}) => {
      );
 }
  
+Footer.defaultProps = {
+  onFilter: () => {},
+  filter:'all',
+  data:[]
+}
 export default Footer;
