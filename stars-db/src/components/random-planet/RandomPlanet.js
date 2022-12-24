@@ -50,7 +50,8 @@ class RandomPlanet extends Component {
     error: false,
   };
   componentDidMount() {
-    setInterval(() => this.setPlanetState(), 15000);
+    this.setPlanetState();
+    setInterval(this.setPlanetState.bind(this), 10000);
   }
   setPlanetState() {
     const id = Math.floor(Math.random() * 17 + 2);
