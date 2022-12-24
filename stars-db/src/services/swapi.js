@@ -5,7 +5,7 @@ class SwapiService {
     if (!res.ok) {
       throw new Error("Faild to fetch data!!!!!!!!!");
     }
-    return res.json;
+    return res.json();
   }
   getAllPeople() {
     return this.getResource();
