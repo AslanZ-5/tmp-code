@@ -9,15 +9,12 @@ class App extends Component {
     this.onClickPerson = this.onClickPerson.bind(this);
   }
   state = {
-    personid: null,
+    personid: 5,
   };
   onClickPerson(id) {
-    this.setState(
-      {
-        personid: id,
-      },
-      () => console.log(this.state.personid)
-    );
+    this.setState({
+      personid: id,
+    });
   }
   render() {
     return (
@@ -30,7 +27,7 @@ class App extends Component {
             <ListItem onClickPerson={this.onClickPerson} />
           </div>
           <div className="col-md-6">
-            <PersonDetails />
+            <PersonDetails personId={this.state.personid} />
           </div>
         </div>
       </div>
