@@ -32,12 +32,12 @@ class SwapiService {
     const starShip = await this.getResource(`starships/${id}/`);
     return this._transoformStarShip(starShip);
   }
-  _extractID(item) {
+  _extractID = (item) => {
     const regEx = /\/([0-9]*)\/$/;
     const id = item.url.match(regEx)[1];
     return id;
-  }
-  _transformPlanetData(planet) {
+  };
+  _transformPlanetData = (planet) => {
     // console.log(this._extractID(planet));
     return {
       id: this._extractID(planet),
@@ -46,8 +46,8 @@ class SwapiService {
       rotationPeriod: planet.rotation_period,
       diameter: planet.diameter,
     };
-  }
-  _transoformStarShip(starship) {
+  };
+  _transoformStarShip = (starship) => {
     return {
       id: this._extractID(starship),
       name: starship.name,
@@ -59,8 +59,8 @@ class SwapiService {
       passengers: starship.passengers,
       cargoCapacity: starship.cargo_capacity,
     };
-  }
-  _transformPerson(person) {
+  };
+  _transformPerson = (person) => {
     return {
       id: this._extractID(person),
       name: person.name,
@@ -68,6 +68,6 @@ class SwapiService {
       birthYear: person.birth_year,
       eyeColor: person.eye_color,
     };
-  }
+  };
 }
 export default SwapiService;

@@ -50,10 +50,10 @@ class RandomPlanet extends Component {
     error: false,
   };
   componentDidMount() {
-    this.setPlanetState();
+    setInterval(() => this.setPlanetState(), 15000);
   }
   setPlanetState() {
-    const id = Math.floor(Math.random() * 19 + 2);
+    const id = Math.floor(Math.random() * 17 + 2);
     const req = new SwapiService();
     const planet = req.getPlanet(id);
     // req.getAllPlanets().then((dt) => console.log(dt));
