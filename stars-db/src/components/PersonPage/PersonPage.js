@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import ListItem from "../list-item";
 import PersonDetails from "../person-details";
+import SwapiService from "../../services/swapi";
+import ErrorBoundry from "../ErrorBoundry";
+import Row from "../Row";
+
 class PersonPage extends Component {
+  swapi = new SwapiService();
   state = {
     personid: 5,
   };
@@ -12,16 +17,20 @@ class PersonPage extends Component {
   };
 
   render() {
-    return (
-      <div className="row mb2">
-        <div className="col-md-6">
-          <ListItem onClickPerson={this.onClickPerson} />
-        </div>
-        <div className="col-md-6">
-          <PersonDetails personId={this.state.personid} />
-        </div>
-      </div>
+    const listItem = (
+      <ListItem
+        renderItem={(item) => `${item.name} ${item.gender} ${item.birthYear}`}
+        getAllItems={this.swapi.getAllPeople}
+        onClickPerson={this.onClickPerson}
+      />
     );
+    const personDetails = (
+      <ErrorBoundry>
+        <PersonDetails personId={this.state.personid} />;
+      </ErrorBoundry>
+    );
+
+    return <Row left={listItem} right={personDetails} />;
   }
 }
 

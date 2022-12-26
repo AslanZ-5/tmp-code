@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import "./ListItem.css";
-import SwapiService from "../../services/swapi";
 class ListItem extends Component {
   state = {
     people: null,
   };
+
   componentDidMount() {
-    let people = new SwapiService();
-    people.getAllPeople().then((data) => this.setState({ people: data }));
+    this.props.getAllItems().then((data) => this.setState({ people: data }));
   }
 
   render() {
+    const { renderItem } = this.props;
     if (!this.state.people) {
       return <h1>LOADS...</h1>;
     }
@@ -22,7 +22,7 @@ class ListItem extends Component {
           className="list-group-item"
           onClick={() => this.props.onClickPerson(per.id)}
         >
-          {per.name}
+          {renderItem(per)}
         </li>
       );
     });
