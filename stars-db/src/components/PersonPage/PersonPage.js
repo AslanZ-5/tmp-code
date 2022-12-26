@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ListItem from "../list-item";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi";
 import ErrorBoundry from "../ErrorBoundry";
 import Row from "../Row";
@@ -8,7 +8,7 @@ import Row from "../Row";
 class PersonPage extends Component {
   swapi = new SwapiService();
   state = {
-    personid: 5,
+    personid: 10,
   };
   onClickPerson = (id) => {
     this.setState({
@@ -17,6 +17,7 @@ class PersonPage extends Component {
   };
 
   render() {
+    const { personid } = this.state;
     const listItem = (
       <ListItem
         renderItem={(item) => `${item.name} ${item.gender} ${item.birthYear}`}
@@ -26,7 +27,11 @@ class PersonPage extends Component {
     );
     const personDetails = (
       <ErrorBoundry>
-        <PersonDetails personId={this.state.personid} />;
+        <ItemDetails
+          getItem={this.swapi.getPerson}
+          itemId={personid}
+          imageUrl={this.swapi.getPersonImage(personid)}
+        />
       </ErrorBoundry>
     );
 

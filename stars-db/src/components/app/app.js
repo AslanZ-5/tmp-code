@@ -3,7 +3,7 @@ import Header from "../header";
 import RandomPlanet from "../random-planet";
 import PersonPage from "../PersonPage";
 import ListItem from "../list-item";
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi";
 import Row from "../Row";
 import ErrorBoundry from "../ErrorBoundry";
@@ -16,9 +16,13 @@ class App extends Component {
         renderItem={(item) => `${item.name} population: ${item.population}`}
       />
     );
-    const personDetails = (
+    const planetDetails = (
       <ErrorBoundry>
-        <PersonDetails personId={1} />
+        <ItemDetails
+          itemId={5}
+          getItem={this.swapi.getPlanet}
+          imageUrl={this.swapi.getPlanetImage(5)}
+        />
       </ErrorBoundry>
     );
 
@@ -28,7 +32,7 @@ class App extends Component {
         <RandomPlanet />
 
         <PersonPage />
-        <Row left={listItem} right={personDetails} />
+        <Row left={listItem} right={planetDetails} />
       </div>
     );
   }
