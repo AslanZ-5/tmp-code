@@ -1,33 +1,25 @@
 import React, { Component } from "react";
 import "./ListItem.css";
 class ListItem extends Component {
-  state = {
-    people: null,
-  };
-
-  componentDidMount() {
-    this.props.getAllItems().then((data) => this.setState({ people: data }));
-  }
-
   render() {
-    const { renderItem } = this.props;
-    if (!this.state.people) {
-      return <h1>LOADS...</h1>;
-    }
-    const { people } = this.state;
-    const peopleEls = people.map((per) => {
+    const { renderLabel } = this.props;
+    // console.log(this.props.children);
+    const { data } = this.props;
+
+    const itemEls = data.map((item) => {
+      const label = renderLabel(item);
       return (
         <li
-          key={per.id}
+          key={item.id}
           className="list-group-item"
-          onClick={() => this.props.onClickPerson(per.id)}
+          onClick={() => this.props.onClickPerson(item.id)}
         >
-          {renderItem(per)}
+          {label}
         </li>
       );
     });
 
-    return <ul className="item-list list-group">{peopleEls}</ul>;
+    return <ul className="item-list list-group">{itemEls}</ul>;
   }
 }
 

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import ListItem from "../list-item";
-import ItemDetails from "../item-details";
+import { PeopleList, PersonDetails } from "../sw-components";
 import SwapiService from "../../services/swapi";
 import ErrorBoundry from "../ErrorBoundry";
 import Row from "../Row";
-import { Record } from "../item-details/ItemDetails";
 
 class PersonPage extends Component {
   swapi = new SwapiService();
@@ -19,24 +17,10 @@ class PersonPage extends Component {
 
   render() {
     const { personid } = this.state;
-    const listItem = (
-      <ListItem
-        renderItem={(item) => `${item.name} ${item.gender} ${item.birthYear}`}
-        getAllItems={this.swapi.getAllPeople}
-        onClickPerson={this.onClickPerson}
-      />
-    );
+    const listItem = <PeopleList onClickPerson={this.onClickPerson} />;
     const personDetails = (
       <ErrorBoundry>
-        <ItemDetails
-          getItem={this.swapi.getPerson}
-          itemId={personid}
-          imageUrl={this.swapi.getPersonImage(personid)}
-        >
-          <Record field="gender" label="Gender" />
-          <Record field="birthYear" label="Birth Year" />
-          <Record field="eyeColor" label="Eye Color" />
-        </ItemDetails>
+        <PersonDetails personid={personid} />
       </ErrorBoundry>
     );
 

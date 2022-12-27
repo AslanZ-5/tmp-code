@@ -28,7 +28,6 @@ class ItemDetails extends Component {
   showItemDet = () => {
     const { itemId: id } = this.props;
     this.props.getItem(id).then((data) => {
-      console.log(data);
       this.setState({
         item: data,
       });
