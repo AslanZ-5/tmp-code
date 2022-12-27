@@ -1,10 +1,12 @@
 import { SSConsumer } from "../swapiContext";
-const SSconsumer = (Wrapper) => {
+
+const SSconsumer = (Wrapper, mapData) => {
   return (props) => {
     return (
       <SSConsumer>
         {(swapi) => {
-          return <Wrapper {...props} swapi={swapi}></Wrapper>;
+          const swapiData = mapData(swapi);
+          return <Wrapper {...props} {...swapiData}></Wrapper>;
         }}
       </SSConsumer>
     );

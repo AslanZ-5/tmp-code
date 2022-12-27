@@ -1,17 +1,18 @@
 import React from "react";
 import ItemDetails, { Record } from "../item-details";
 import SSconsumer from "../HOC/SSconsumer";
-const PlanetDetails = ({ swapi }) => {
+const PlanetDetails = (props) => {
   return (
-    <ItemDetails
-      itemId={5}
-      getItem={swapi.getPlanet}
-      imageUrl={swapi.getPlanetImage(5)}
-    >
+    <ItemDetails itemId={5} {...props}>
       <Record field={"diameter"} label={"Diameter"} />
       <Record field={"rotationPeriod"} label={"R-Period"} />
     </ItemDetails>
   );
 };
-
-export default SSconsumer(PlanetDetails);
+const MapPlanetDetailsData = (sw) => {
+  return {
+    getItem: sw.getPlanet,
+    imageUrl: sw.getPlanetImage,
+  };
+};
+export default SSconsumer(PlanetDetails, MapPlanetDetailsData);

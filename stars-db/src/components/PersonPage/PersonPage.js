@@ -20,7 +20,7 @@ class PersonPage extends Component {
     const listItem = <PeopleList onClickPerson={this.onClickPerson} />;
     const personDetails = (
       <ErrorBoundry>
-        <PersonDetails personid={personid} />
+        <PersonDetails itemId={personid} />
       </ErrorBoundry>
     );
 

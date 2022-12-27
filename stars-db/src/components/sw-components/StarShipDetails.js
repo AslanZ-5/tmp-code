@@ -2,18 +2,19 @@ import React from "react";
 import ItemDetails, { Record } from "../item-details";
 import SSconsumer from "../HOC/SSconsumer";
 
-const StarShipDetails = ({ swapi }) => {
+const StarShipDetails = (props) => {
   return (
-    <ItemDetails
-      getItem={swapi.getStarship}
-      itemId={12}
-      imageUrl={swapi.getStarShipImage(12)}
-    >
+    <ItemDetails {...props} itemId={12}>
       <Record field="model" label="Model" />
       <Record field="manufacturer" label="Manufacturer" />
       <Record field="crew" label="Crew" />
     </ItemDetails>
   );
 };
-
-export default SSconsumer(StarShipDetails);
+const MapStarShipDetailsData = (sw) => {
+  return {
+    getItem: sw.getStarship,
+    imageUrl: sw.getStarShipImage,
+  };
+};
+export default SSconsumer(StarShipDetails, MapStarShipDetailsData);

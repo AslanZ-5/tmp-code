@@ -1,18 +1,19 @@
 import React from "react";
 import ItemDetails, { Record } from "../item-details";
 import SSconsumer from "../HOC/SSconsumer";
-const PersonDetails = ({ personid, swapi }) => {
+const PersonDetails = (props) => {
   return (
-    <ItemDetails
-      getItem={swapi.getPerson}
-      itemId={personid}
-      imageUrl={swapi.getPersonImage(personid)}
-    >
+    <ItemDetails {...props}>
       <Record field="gender" label="Gender" />
       <Record field="birthYear" label="Birth Year" />
       <Record field="eyeColor" label="Eye Color" />
     </ItemDetails>
   );
 };
-
-export default SSconsumer(PersonDetails);
+const MapPersonDetailsData = (sw) => {
+  return {
+    getItem: sw.getPerson,
+    imageUrl: sw.getPersonImage,
+  };
+};
+export default SSconsumer(PersonDetails, MapPersonDetailsData);

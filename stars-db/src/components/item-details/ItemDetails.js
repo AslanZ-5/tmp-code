@@ -34,7 +34,7 @@ class ItemDetails extends Component {
     });
   };
   render() {
-    const { imageUrl } = this.props;
+    const imageUrl = this.props.imageUrl(this.props.itemId);
     if (!this.state.item) {
       return <div className="l">Loading...</div>;
     }
