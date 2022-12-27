@@ -4,6 +4,7 @@ import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi";
 import ErrorBoundry from "../ErrorBoundry";
 import Row from "../Row";
+import { Record } from "../item-details/ItemDetails";
 
 class PersonPage extends Component {
   swapi = new SwapiService();
@@ -31,7 +32,11 @@ class PersonPage extends Component {
           getItem={this.swapi.getPerson}
           itemId={personid}
           imageUrl={this.swapi.getPersonImage(personid)}
-        />
+        >
+          <Record field="gender" label="Gender" />
+          <Record field="birthYear" label="Birth Year" />
+          <Record field="eyeColor" label="Eye Color" />
+        </ItemDetails>
       </ErrorBoundry>
     );
 

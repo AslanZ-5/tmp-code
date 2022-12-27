@@ -1,5 +1,17 @@
 import React, { Component } from "react";
 import "./ItemDetails.css";
+
+const Record = ({ field, label, item }) => {
+  return (
+    <li className="list-group-item">
+      <span className="term">{label}</span>
+      <span>{item[field]}</span>
+    </li>
+  );
+};
+
+export { Record };
+
 class ItemDetails extends Component {
   state = {
     item: null,
@@ -16,6 +28,7 @@ class ItemDetails extends Component {
   showItemDet = () => {
     const { itemId: id } = this.props;
     this.props.getItem(id).then((data) => {
+      console.log(data);
       this.setState({
         item: data,
       });
@@ -26,7 +39,7 @@ class ItemDetails extends Component {
     if (!this.state.item) {
       return <div className="l">Loading...</div>;
     }
-    const { name, gender, birthYear, eyeColor, id } = this.state.item;
+    const { name } = this.state.item;
     return (
       <div className="item-details card">
         <img className="item-image" alt="d" src={imageUrl} />
@@ -34,18 +47,9 @@ class ItemDetails extends Component {
         <div className="card-body">
           <h4>{name}</h4>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item">
-              <span className="term">Gender</span>
-              <span>{gender}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Birth Year</span>
-              <span>{birthYear}</span>
-            </li>
-            <li className="list-group-item">
-              <span className="term">Eye Color</span>
-              <span>{eyeColor}</span>
-            </li>
+            {React.Children.map(this.props.children, (child) => {
+              return React.cloneElement(child, { item: this.state.item });
+            })}
           </ul>
         </div>
       </div>

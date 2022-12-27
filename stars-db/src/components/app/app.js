@@ -7,6 +7,7 @@ import ItemDetails from "../item-details";
 import SwapiService from "../../services/swapi";
 import Row from "../Row";
 import ErrorBoundry from "../ErrorBoundry";
+import { Record } from "../item-details/ItemDetails";
 class App extends Component {
   swapi = new SwapiService();
   render() {
@@ -22,7 +23,10 @@ class App extends Component {
           itemId={5}
           getItem={this.swapi.getPlanet}
           imageUrl={this.swapi.getPlanetImage(5)}
-        />
+        >
+          <Record field={"diameter"} label={"Diameter"} />
+          <Record field={"rotationPeriod"} label={"R-Period"} />
+        </ItemDetails>
       </ErrorBoundry>
     );
 
