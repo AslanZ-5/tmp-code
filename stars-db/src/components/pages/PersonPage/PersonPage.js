@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { PeopleList, PersonDetails } from "../sw-components";
-import SwapiService from "../../services/swapi";
-import ErrorBoundry from "../ErrorBoundry";
-import Row from "../Row";
+import { PeopleList, PersonDetails } from "../../sw-components";
+import ErrorBoundry from "../../ErrorBoundry";
+import Row from "../../Row";
 
 class PersonPage extends Component {
-  swapi = new SwapiService();
   state = {
     personid: 10,
   };
@@ -17,7 +15,7 @@ class PersonPage extends Component {
 
   render() {
     const { personid } = this.state;
-    const listItem = <PeopleList onClickPerson={this.onClickPerson} />;
+    const listItem = <PeopleList onClickItem={this.onClickPerson} />;
     const personDetails = (
       <ErrorBoundry>
         <PersonDetails itemId={personid} />

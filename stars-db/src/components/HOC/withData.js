@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import Loading from "../loading";
 
-const withData = (View, getAllData, renderLabel) => {
+const withData = (View, renderLabel) => {
   return class extends Component {
     state = {
       data: null,
     };
 
     componentDidMount() {
-      getAllData().then((data) => this.setState({ data }));
+      this.props.getAllData().then((data) => this.setState({ data }));
     }
 
     render() {

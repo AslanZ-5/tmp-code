@@ -12,7 +12,7 @@ class ListItem extends Component {
         <li
           key={item.id}
           className="list-group-item"
-          onClick={() => this.props.onClickPerson(item.id)}
+          onClick={() => this.props.onClickItem(item.id)}
         >
           {label}
         </li>

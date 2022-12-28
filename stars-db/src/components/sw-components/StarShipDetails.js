@@ -4,7 +4,7 @@ import SSconsumer from "../HOC/SSconsumer";
 
 const StarShipDetails = (props) => {
   return (
-    <ItemDetails {...props} itemId={12}>
+    <ItemDetails {...props} itemId={props.starshipid}>
       <Record field="model" label="Model" />
       <Record field="manufacturer" label="Manufacturer" />
       <Record field="crew" label="Crew" />

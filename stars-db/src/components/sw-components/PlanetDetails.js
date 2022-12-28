@@ -3,7 +3,7 @@ import ItemDetails, { Record } from "../item-details";
 import SSconsumer from "../HOC/SSconsumer";
 const PlanetDetails = (props) => {
   return (
-    <ItemDetails itemId={5} {...props}>
+    <ItemDetails itemId={props.planetid} {...props}>
       <Record field={"diameter"} label={"Diameter"} />
       <Record field={"rotationPeriod"} label={"R-Period"} />
     </ItemDetails>

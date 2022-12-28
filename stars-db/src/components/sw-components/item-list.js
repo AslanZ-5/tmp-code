@@ -1,22 +1,35 @@
 // import React from "react";
 import SwapiService from "../../services/swapi";
 import { withData } from "../HOC";
+import SSconsumer from "../HOC";
 import ListItem from "../list-item";
 const swapi = new SwapiService();
-const PeopleList = withData(
-  ListItem,
-  swapi.getAllPeople,
-  (item) => `${item.name} ${item.gender} ${item.birthYear}`
+const mapPeopleData = (sw) => {
+  return {
+    getAllData: sw.getAllPeople,
+  };
+};
+const PeopleList = SSconsumer(
+  withData(ListItem, (item) => `${item.name} ${item.gender} ${item.birthYear}`),
+  mapPeopleData
 );
-const PlanetList = withData(
-  ListItem,
-  swapi.getAllPlanets,
-  (item) => `${item.name} populatiton: ${item.population}`
+const mapPlanetData = (sw) => {
+  return {
+    getAllData: sw.getAllPlanets,
+  };
+};
+const PlanetList = SSconsumer(
+  withData(ListItem, (item) => `${item.name} populatiton: ${item.population}`),
+  mapPlanetData
 );
-const StarShipList = withData(
-  ListItem,
-  swapi.getAllStarships,
-  (item) => `starShip:${item.name}`
+const mapStarshipData = (sw) => {
+  return {
+    getAllData: sw.getAllStarships,
+  };
+};
+const StarShipList = SSconsumer(
+  withData(ListItem, (item) => `starShip:${item.name}`),
+  mapStarshipData
 );
 
 export { PlanetList, PeopleList, StarShipList };
