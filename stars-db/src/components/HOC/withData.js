@@ -5,23 +5,37 @@ const withData = (View, renderLabel) => {
   return class extends Component {
     state = {
       data: null,
+      loading: true,
+      hasError: false,
     };
 
     componentDidMount() {
-      this.props.getAllData().then((data) => this.setState({ data }));
+      this.props
+        .getAllData()
+        .then((data) => {
+          this.setState({ data }, () => {
+            this.setState({
+              loading: false,
+            });
+          });
+        })
+        .catch(() => {
+          this.setState({
+            loading: false,
+            hasError: true,
+          });
+        });
     }
 
     render() {
-      if (!this.state.data) {
+      const { loading, data, hasError } = this.state;
+      if (loading) {
         return <Loading />;
       }
-      return (
-        <View
-          {...this.props}
-          data={this.state.data}
-          renderLabel={renderLabel}
-        />
-      );
+      if (hasError) {
+        return <div>ERROR!! Somethis went wrong</div>;
+      }
+      return <View {...this.props} data={data} renderLabel={renderLabel} />;
     }
   };
 };
