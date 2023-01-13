@@ -1,4 +1,4 @@
-import CardPage from "./CardPage";
+import CartPage from "./CartPage";
 import HomePage from "./HomePage";
 
-export { CardPage, HomePage };
+export { CartPage, HomePage };
