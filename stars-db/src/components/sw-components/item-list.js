@@ -1,9 +1,8 @@
 // import React from "react";
-import SwapiService from "../../services/swapi";
 import { withData } from "../HOC";
 import SSconsumer from "../HOC";
 import ListItem from "../list-item";
-const swapi = new SwapiService();
+import { Link } from "react-router-dom";
 const mapPeopleData = (sw) => {
   return {
     getAllData: sw.getAllPeople,
@@ -28,7 +27,9 @@ const mapStarshipData = (sw) => {
   };
 };
 const StarShipList = SSconsumer(
-  withData(ListItem, (item) => `starShip:${item.name}`),
+  withData(ListItem, (item) => (
+    <Link to={`${item.id}`}> {`starShip:${item.name}`}</Link>
+  )),
   mapStarshipData
 );
 

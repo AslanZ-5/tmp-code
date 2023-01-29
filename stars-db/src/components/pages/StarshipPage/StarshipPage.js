@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Row from "../../Row";
-import { StarShipList, StarShipDetails } from "../../sw-components";
+import { StarShipList } from "../../sw-components";
 class StarshipPage extends Component {
   constructor(props) {
     super(props);
@@ -13,9 +12,7 @@ class StarshipPage extends Component {
     this.setState({ starshipid: id });
   }
   render() {
-    const starShipList = <StarShipList onClickItem={this.onclickStarship} />;
-    const sSDetails = <StarShipDetails starshipid={this.state.starshipid} />;
-    return <Row left={starShipList} right={sSDetails} />;
+    return <StarShipList onClickItem={this.onclickStarship} />;
   }
 }
 
