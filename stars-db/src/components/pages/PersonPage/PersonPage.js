@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { PeopleList, PersonDetails } from "../../sw-components";
 import ErrorBoundry from "../../ErrorBoundry";
 import Row from "../../Row";
-
 class PersonPage extends Component {
   state = {
     personid: 10,
@@ -12,13 +11,15 @@ class PersonPage extends Component {
       personid: id,
     });
   };
-
+  
   render() {
     const { personid } = this.state;
     const listItem = <PeopleList onClickItem={this.onClickPerson} />;
     const personDetails = (
       <ErrorBoundry>
+        <React.Profiler id="persondDetails" onRender={onRender}>
         <PersonDetails itemId={personid} />
+        </React.Profiler>
       </ErrorBoundry>
     );
 

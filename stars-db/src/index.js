@@ -3,9 +3,20 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./components/app";
 const root = ReactDOM.createRoot(document.getElementById("root"));
+function onRender(id, phase, actualDuration, baseDuration, startTime, commitTime) {
+  // Aggregate or log render timings...
+  console.log("----this phase--",phase)
+  console.log(actualDuration)
+  console.log(baseDuration)
+  console.log(startTime)
+  console.log(commitTime)
+}
 root.render(
   <React.StrictMode>
-    <App />
+    <React.Profiler id='app' onRender={onRender}>
+<App />
+    </React.Profiler>
+    
   </React.StrictMode>
 );
 
