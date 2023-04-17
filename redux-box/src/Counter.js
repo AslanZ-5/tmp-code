@@ -1,7 +1,9 @@
 // import {connect} from 'react-redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { addNewProduct, fetchProduct} from './productsSlice';
-import { addNewAuthor, fetchAuthors } from './authorSlice';
+import { useGetAllAuthorsQuery } from './authorSlice';
+
+// import { addNewAuthor, fetchAuthors } from './authorSlice';
 
 // import * as actions from './actionCreators';
 // import { bindActionCreators } from 'redux';
@@ -40,24 +42,28 @@ import { addNewAuthor, fetchAuthors } from './authorSlice';
 
 const Counter = () => {
     const {products} = useSelector(state => state)
-    const {authors} = useSelector(state => state)
+    const {data:authors, isFetching} = useGetAllAuthorsQuery()
+
+    // const {authors} = useSelector(state => state)
     const dispatch = useDispatch()
+    console.log(authors)
 
     return ( <div>
         <div  style={{display:"flex"}}>
+            {isFetching && <h1> ReFETchinge.....</h1> }
             <div>{products.map(item => <div key={item.id}> {item.title} </div>)}</div>
-            <div>{authors.map(item => <div key={item.id}> {item.lastName} .{item.firstName.slice(0,1)} --- {item.address.address}</div>)}</div>
+            <div>{authors?.map(item => <div key={item.id}> {item.lastName} .{item.firstName.slice(0,1)} --- {item.address.address}</div>)}</div>
         
         </div>
         <button id="inc" onClick={() => dispatch(fetchProduct())} className="btn btn-primary btn-lg">fetchInitialData</button>
-        <button id="dec" onClick={() => dispatch(addNewAuthor({
+        {/* <button id="dec" onClick={() => dispatch(addNewAuthor({
         id: 13332,
         firstName: 'abu usama',
         lastName: 'atamimi',
         address: {address: 'qasim'}
-    }))} className="btn btn-primary btn-lg">addAuthor</button>
+    }))} className="btn btn-primary btn-lg">addAuthor</button> */}
         <button id="dec" onClick={() => dispatch(addNewProduct({id:"new12334", title:'new product'}))} className="btn btn-primary btn-lg">ADD</button>
-        <button id="inc" onClick={() => dispatch(fetchAuthors())} className="btn btn-primary btn-lg">fetchInitialAuthorData</button>
+        {/* <button id="inc" onClick={() => dispatch(fetchAuthors())} className="btn btn-primary btn-lg">fetchInitialAuthorData</button> */}
     </div> );
 }
  

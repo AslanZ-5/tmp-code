@@ -1,13 +1,15 @@
 // import {createStore, applyMiddleware} from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import {React} from 'react';
 // import thunkMiddleware from 'redux-thunk';
 import { Provider } from 'react-redux';
 import  ReactDOM  from 'react-dom';
 // import rootReducer from './reducer';
 import App from './App';
-import authorsReducer from './authorSlice';
+import { authorsSlice } from './authorSlice';
 import productsReducer from './productsSlice';
+import { getDefaultNormalizer } from '@testing-library/react';
 
 // const logger = (store) => (next) => (action) => {
 //   console.log(store.getState())
@@ -55,10 +57,14 @@ import productsReducer from './productsSlice';
 
 const store = configureStore({
   reducer: {
-    authors: authorsReducer,
+    [authorsSlice.reducerPath]: authorsSlice.reducer,
     products: productsReducer
-  }
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+    authorsSlice.middleware
+  )
 })
+setupListeners(store.dispatch)
 ReactDOM.render(
 <Provider store={store}>
   <App/>
